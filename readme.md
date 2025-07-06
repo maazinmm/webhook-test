@@ -62,6 +62,12 @@ https://random-id.ngrok.app
 ```
 https://random-id.ngrok.io/github
 ```
+```
+@app.route("/github", methods=["POST"])
+def api_gh_message():
+    if request.headers['Content-Type'] == 'application/json':
+        return json.dumps(request.json)
+```
 <sub>***/github is my app route as shown in the flask code***</sub>
 
 4. Choose application/json as the content type.
