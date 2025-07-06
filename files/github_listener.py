@@ -8,7 +8,7 @@ app = Flask(__name__)
 def api_root():
     return "Hello  world!"
 
-@app.route("/github", methods=["POST"])
+@app.route("/webhook", methods=["POST"])
 def api_gh_message():
     if request.headers['Content-Type'] == 'application/json':
         return json.dumps(request.json)

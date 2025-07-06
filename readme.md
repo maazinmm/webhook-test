@@ -58,18 +58,16 @@ https://random-id.ngrok.app
 ## Connect GitHub Webhook
 1. Go to your GitHub repository.
 2. Click Settings > Webhooks > Add webhook.
-3. Paste your ngrok URL + /github, for example:
+3. Paste your ngrok URL + /webhook, for example:
 ```
-https://random-id.ngrok.io/github
+https://random-id.ngrok.io/webhook
 ```
 ```
-@app.route("/github", methods=["POST"])
+@app.route("/webhook", methods=["POST"])
 def api_gh_message():
     if request.headers['Content-Type'] == 'application/json':
         return json.dumps(request.json)
 ```
-<sub>***/github is my app route as shown in the flask code***</sub>
-
 4. Choose application/json as the content type.
 5. Choose the events you want (or select "Just the push event").
 6. Click Add webhook.
