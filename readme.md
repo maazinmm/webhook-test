@@ -67,5 +67,4 @@ https://random-id.ngrok.io/webhook
 5. Choose the events you want (or select "Just the push event").
 6. Click Add webhook.
 
-
 ```bash
