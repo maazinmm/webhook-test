@@ -1,37 +1,71 @@
-# Readme.md
+# GitHub Webhook Receiver with Flask
 
-![alt text](image9.png)
-To activate Webhook, you go to Settings in your github repo
+This is a simple Flask web application that listens for GitHub webhooks and prints the payload to your terminal or console. It's great for learning how webhooks work and how GitHub can communicate with your own apps.
 
-![alt text](image-1.png)
-Find Webhooks in the left side pane
+---
 
-![alt text](image-2.png)
-Add Webhook
+## What This Project Does
 
-![alt text](image3.png)
-Run the web App
+This app:
+- Starts a local Flask server.
+- Listens for a `POST` request at a `/webhook` endpoint.
+- Prints the GitHub event data it receives.
+- Uses [ngrok](https://ngrok.com/) to make your local server accessible over the internet.
+- Is useful for testing GitHub webhooks on your machine before deploying to a real server.
 
-![alt text](image4.png)
-Open a new terminal window to run ngrok
-ngrok translates your localhost address to one that's open to the internet (useful for the webhook)
-You have to download and install ngrok first (a simple google search should give you enough info)
+---
 
-![alt text](image.png)
-Run: ngrok http [port number] 
-```bash
+## Tools Used
+
+- [Python 3](https://www.python.org/)
+- [Flask](https://flask.palletsprojects.com/)
+- [ngrok](https://ngrok.com/) – exposes your local server to the internet
+- [GitHub Webhooks](https://docs.github.com/en/webhooks)
+
+---
+
+## How to Set It Up
+
+### 1. **Clone this repository**
+
+git clone https://github.com/maazinmm/webhook-test.git
+cd webhook-test
+
+## Create and activate a virtual environment
+
+python -m venv venv
+venv\Scripts\activate
+
+
+## Run the Flask app
+
+python github-webhook.py
+
+The app will start running on http://127.0.0.1:5000
+
+
+## Expose Flask to the Internet with ngrok
+
+GitHub needs to reach your local server to send webhook data.
+
+### Step 1: Start ngrok
+In a new terminal (don't close your Flask app), run:
+
 ngrok http 5000
-```
-![alt text](image5.png)
-Your "public" localhost address is live
 
-![alt text](image6.png)
-Paste the public URL in the Webhook payload, and make "content-type" here matches your code
+ngrok will give you a public URL like:
+https://random-id.ngrok.app
 
-![alt text](image7.png)
-Scroll down and select the event you want to trigger the webhook
+## Connect GitHub Webhook
+1. Go to your GitHub repository.
+2. Click Settings > Webhooks > Add webhook.
+3. Paste your ngrok URL + /github, for example:
 
-![alt text](image8.png)
-I have selected "pushes", "labels", and "pull requests"
+https://random-id.ngrok.io/webhook
 
-Scroll down and Add Webhook!
+4. Choose application/json as the content type.
+5. Choose the events you want (or select "Just the push event").
+6. Click Add webhook.
+
+
+```bash
